@@ -42,9 +42,11 @@ bugly {
 如果您的Android工程是纯Java代码，只需要导入Jar文件。如果含有Native代码，需一并导入so文件。
 
 - Eclipse工程
+
 ![Alt text](http://bugly.qq.com/img/white-book/android3.jpg)
 <br/>
 - AndroidStudio工程
+
 ![Alt text](http://bugly.qq.com/img/white-book/android4.jpg)
 
 为了使您的堆栈可读性更高，对于纯Java代码项目，只需在版本管理（设置）的对应版本中上传混淆后生成的Mapping文件即可；对于含有Native代码的工程，除了Mapping文件，还需要通过符号表工具手动提Debug SO的Symbol符号表文件。具体方法请参考：《符号表配置（Android）》
