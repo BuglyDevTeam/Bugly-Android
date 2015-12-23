@@ -8,7 +8,7 @@
 ```groovy
 classpath 'com.tencent.bugly:symtabfileuploader:latest.release' //latest.release代表最新版本
 ```
-![Alt text](./Android1.png)
+![Alt text](http://bugly.qq.com/img/white-book/android1.jpg)
 
 在Module的buid.gradle文件的顶部添加依赖和属性：
 
@@ -25,7 +25,7 @@ bugly {
 }
 ```
 
-![Alt text](./Android2.png)
+![Alt text](http://bugly.qq.com/img/white-book/android2.jpg)
 
 至此，Bugly SDK和插件已经集成完成了。后续更新Bugly时，只需修改配置脚本中的版本号即可。
 <br/>
@@ -42,10 +42,10 @@ bugly {
 如果您的Android工程是纯Java代码，只需要导入Jar文件。如果含有Native代码，需一并导入so文件。
 
 - Eclipse工程
-![Alt text](./android3.jpg)
+![Alt text](http://bugly.qq.com/img/white-book/android3.jpg)
 <br/>
 - AndroidStudio工程
-![Alt text](./android4.jpg)
+![Alt text](http://bugly.qq.com/img/white-book/android4.jpg)
 
 为了使您的堆栈可读性更高，对于纯Java代码项目，只需在版本管理（设置）的对应版本中上传混淆后生成的Mapping文件即可；对于含有Native代码的工程，除了Mapping文件，还需要通过符号表工具手动提Debug SO的Symbol符号表文件。具体方法请参考：《符号表配置（Android）》
 
@@ -92,6 +92,6 @@ Bugly会为您检测使用环境并自动完成配置。请将以下CrashReport�
 	CrashReport.testJavaCrash();
 ```
 执行到这段代码时会发生一个Crash，此时Logcat的TAG=CrashReportInfo中输出为：
-![Alt text](./android5.jpg)
+![Alt text](http://bugly.qq.com/img/white-book/android5.jpg)
 
 现在您已经可以在网页上看到刚才的异常详情了（延迟一般在10s以内）。
