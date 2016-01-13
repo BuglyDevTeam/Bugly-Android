@@ -8,12 +8,21 @@
 ```groovy
 classpath 'com.tencent.bugly:symtabfileuploader:latest.release' //latest.release代表最新版本
 ```
-![Alt text](http://bugly.qq.com/img/white-book/android1.jpg)
+![Alt text](http://bugly.qq.com/img/white-book/android1.png?v=20160111185655)
 
 在Module的buid.gradle文件的顶部添加依赖和属性：
 
 ```groovy
 apply plugin: 'bugly'	//添加Bugly符号表插件
+
+android {
+	defaultConfig {
+		ndk {
+			// 设置支持的SO库架构
+			abiFilters 'armeabi' //, 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
+		}
+	}
+}
 
 dependencies {
     compile 'com.tencent.bugly:crashreport:latest.release'
@@ -25,9 +34,9 @@ bugly {
 }
 ```
 
-![Alt text](http://bugly.qq.com/img/white-book/android2.jpg)
+![Alt text](http://bugly.qq.com/img/white-book/android2.png?v=20160111185655)
 
-至此，Bugly SDK和插件已经集成完成了。后续更新Bugly时，只需修改配置脚本中的版本号即可。
+后续更新Bugly时，只需修改配置脚本中的版本号即可。
 <br/>
 ####方式2. 手动导入
 如果您不采用上述自动导入方式，也可以手动接入Bugly。
@@ -50,20 +59,6 @@ bugly {
 ![Alt text](http://bugly.qq.com/img/white-book/android4.jpg)
 
 为了使您的堆栈可读性更高，对于纯Java代码项目，只需在版本管理（设置）的对应版本中上传混淆后生成的Mapping文件即可；对于含有Native代码的工程，除了Mapping文件，还需要通过符号表工具手动提Debug SO的Symbol符号表文件。具体方法请参考：《符号表配置（Android）》
-
-注意：如果存在其他的SO文件（例如第三方SO文件）且只有某些特定架构，建议在Module的build.gradle文件中使用NDK的abiFilter配置。
-
-在Module的buid.gradle文件中添加：
-```groovy
-android {
-	defaultConfig {
-		ndk {
-			abiFilters '<架构1>' [, '<架构2>'...] // 例如：abiFilters 'armeabi', 'x86'
-		}
-	}
-}
-``` 
-<br/>
 
 ###**二、参数配置**
  在AndroidManifest.xml中添加权限：
