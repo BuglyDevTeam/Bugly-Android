@@ -8,7 +8,7 @@
 ```groovy
 classpath 'com.tencent.bugly:symtabfileuploader:latest.release' //latest.release代表最新版本
 ```
-![Alt text](http://bugly.qq.com/img/white-book/android1.png?v=20160111185655)
+![Alt text](http://bugly.qq.com/img/white-book/android1.png)
 
 在Module的buid.gradle文件的顶部添加依赖和属性：
 
@@ -34,7 +34,7 @@ bugly {
 }
 ```
 
-![Alt text](http://bugly.qq.com/img/white-book/android2.png?v=20160111185655)
+![Alt text](http://bugly.qq.com/img/white-book/android2.png)
 
 后续更新Bugly时，只需修改配置脚本中的版本号即可。
 <br/>
