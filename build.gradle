@@ -13,10 +13,11 @@ apply plugin: 'com.android.library'
 apply plugin: 'android-maven'
 apply plugin: 'com.jfrog.bintray'
 
-version = "1.2.8"
+version = "2.1.1"
 group = "com.tencent.bugly"
 
 def buglyJar = "lib/bugly_${version}_release.jar"
+def newBuglyJar = "lib/bugly_crash_release__${version}.jar"
 
 android {
     compileSdkVersion 19
@@ -59,13 +60,14 @@ install {
         pom.project {
             packaging 'aar'
             // Add your description here
+            description = "Crash reporter for android application"
             name 'CrashReport for Android'
             url siteUrl
             // Set your license
             licenses {
                 license {
-                    name 'The Apache Software License, Version 2.0'
-                    url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    name = 'The Bugly Software License, Version 1.0'
+                    url 'http://bugly.qq.com/licenses/LICENSE-1.0.txt'
                 }
             }
             developers {
@@ -83,8 +85,17 @@ install {
         }
     }
 }
-task unJarToClasses(type: Copy) {
-    from zipTree(buglyJar)
+
+task cleanEnv << {
+    println "clean build dir"
+    File buildDir = new File("$projectDir/build/")
+    if (buildDir.exists()) {
+        buildDir.deleteDir()
+    }
+}
+
+task unJarToClasses(type: Copy, dependsOn: cleanEnv) {
+    from zipTree(newBuglyJar)
     exclude 'META-INF'
     into 'build/intermediates/classes/release'
 }
@@ -92,7 +103,7 @@ task unJarToClasses(type: Copy) {
 preBuild.dependsOn unJarToClasses
 
 task sourcesJar(type: Jar) {
-    from zipTree(buglyJar)
+    from zipTree(newBuglyJar)
     exclude 'META-INF'
     classifier = 'sources'
 }
@@ -128,5 +139,16 @@ bintray {
         vcsUrl = gitUrl
         licenses = ["Apache-2.0"]
         publish = true
+        version {
+          gpg {
+              sign = true // Determines whether to GPG sign the files. The default is false
+              passphrase = properties.getProperty("bintray.gpg.password") // Optional. The passphrase for GPG signing'
+          }
+//            mavenCentralSync {
+//                sync = true //Optional (true by default). Determines whether to sync the version to Maven Central.
+//                user = properties.getProperty("bintray.oss.user") //OSS user token
+//                password = properties.getProperty("bintray.oss.password") //OSS user password
+//            }
+        }
     }
 }
