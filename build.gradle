@@ -51,8 +51,8 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 }
 
-def siteUrl = "https://github.com/JalenChen/CrashReport"
-def gitUrl = "https://github.com/JalenChen/CrashReport.git"
+def siteUrl = "https://github.com/BuglyDevTeam/Bugly-Android"
+def gitUrl = "https://github.com/BuglyDevTeam/Bugly-Android.git"
 
 install {
     repositories.mavenInstaller {
